@@ -20,6 +20,8 @@ sidebars, comments, ect.
 	- page-navi function
 	- removing <p> from around images
 	- customizing the post excerpt
+	- custom google+ integration
+	- adding custom fields to user profiles
 */
 require_once('library/bones.php'); // if you remove this, bones will break
 /*
@@ -38,15 +40,7 @@ require_once('library/custom-post-type.php'); // you can disable this if you lik
 */
 // require_once('library/admin.php'); // this comes turned off by default
 /*
-4. library/plugins.php
-    - expirimental functions or add-ons
-    - custom facebook open graph integration
-    - custom google+ integration
-    - adding custom fields to user profiles
-*/
-// require_once('library/plugins.php'); // this comes turned off by default
-/*
-5. library/translation/translation.php
+4. library/translation/translation.php
     - adding support for other languages
 */
 // require_once('library/translation/translation.php'); // this comes turned off by default
@@ -136,8 +130,8 @@ function bones_comments($comment, $args, $depth) {
 				<?php edit_comment_link(__('(Edit)'),'  ','') ?>
 			</header>
 			<?php if ($comment->comment_approved == '0') : ?>
-       			<div class="help">
-          			<p><?php __('Your comment is awaiting moderation.') ?></p>
+       			<div class="alert info">
+          			<p><?php _e('Your comment is awaiting moderation.') ?></p>
           		</div>
 			<?php endif; ?>
 			<section class="comment_content clearfix">
@@ -155,7 +149,7 @@ function bones_comments($comment, $args, $depth) {
 function bones_wpsearch($form) {
     $form = '<form role="search" method="get" id="searchform" action="' . home_url( '/' ) . '" >
     <label class="screen-reader-text" for="s">' . __('Search for:', 'bonestheme') . '</label>
-    <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="Search the Site..." />
+    <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="'.esc_attr__('Search the Site...','bonestheme').'" />
     <input type="submit" id="searchsubmit" value="'. esc_attr__('Search') .'" />
     </form>';
     return $form;
